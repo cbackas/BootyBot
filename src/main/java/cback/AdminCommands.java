@@ -1,5 +1,6 @@
 package cback;
 
+import com.memetix.mst.language.Language;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IMessage;
@@ -43,6 +44,18 @@ public class AdminCommands {
                     String sayText = matcher.group(2);
                     Util.sendMessage(event.getClient().getChannelByID(channel), sayText);
                     Util.deleteMessage(message);
+                }
+            } else if (text.startsWith("//setlanguage")) {
+                Pattern pattern = Pattern.compile("^//setlanguage (.+)");
+                Matcher matcher = pattern.matcher(text);
+                if (matcher.find()) {
+                    String language = matcher.group(1);
+                    Language lang = Language.valueOf(language.toUpperCase());
+                    if (lang != null) {
+                        Trans.currentLang = lang;
+                        Util.properties.put("language", language);
+                        Util.writeProperties();
+                    }
                 }
             }
         }

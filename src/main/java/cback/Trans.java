@@ -21,19 +21,7 @@ public class Trans {
         IMessage message = event.getMessage();
         String text = message.getContent();
         String author = message.getAuthor().getDisplayName(message.getGuild());
-        if (text.startsWith("//setlanguage")) {
-            Pattern pattern = Pattern.compile("^//setlanguage (.+)");
-            Matcher matcher = pattern.matcher(text);
-            if (matcher.find()) {
-                String language = matcher.group(1);
-                Language lang = Language.valueOf(language.toUpperCase());
-                if (lang != null) {
-                    currentLang = lang;
-                    Util.properties.put("language", language);
-                    Util.writeProperties();
-                }
-            }
-        } else if (message.getGuild().getID().equals("73463428634648576") && message.getChannel().getID().equals("73463428634648576")) {
+        if (message.getGuild().getID().equals("73463428634648576") && message.getChannel().getID().equals("73463428634648576")) {
             if (text.startsWith("//") || text.startsWith("!") || text.startsWith("`")) {
                 //do nothing
             } else if (text.contains("http") || text.contains(".com") || text.contains(".net") || text.equals(".co.uk") || text.contains(".gov") || text.contains("www.") || text.contains(".org")) {
