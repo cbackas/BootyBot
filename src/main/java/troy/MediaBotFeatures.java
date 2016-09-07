@@ -59,8 +59,8 @@ public class MediaBotFeatures {
                     return null;
                 }
             } else {
-                FileUtils.writeStringToFile(ipFile, "149.56.110.70", (String) null);
-                return "149.56.110.70";
+                FileUtils.writeStringToFile(ipFile, "0.0.0.0", (String) null);
+                return "0.0.0.0";
             }
         } catch (IOException e) {
             e.printStackTrace();
