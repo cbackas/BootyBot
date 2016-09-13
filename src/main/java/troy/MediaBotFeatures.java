@@ -11,9 +11,6 @@ import org.apache.commons.io.FileUtils;
 import sx.blah.discord.handle.impl.events.GuildCreateEvent;
 import sx.blah.discord.handle.obj.IChannel;
 
-/**
- * The main class of the plugin.
- */
 public class MediaBotFeatures {
 
     private static MediaBotFeatures instance;

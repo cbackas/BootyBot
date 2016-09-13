@@ -60,16 +60,4 @@ public class BootyBot {
         MediaBotFeatures.onGuildCreate(event);
     }
 
-    @EventSubscriber
-    public void onDisconnectEvent(DiscordDisconnectedEvent event) {
-        System.out.println("DISCONNECTED. Reconnecting in 15 seconds.");
-        try {
-            Thread.sleep(1000 * 15);
-            System.out.println("Attempting reconnect...");
-            connect();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }

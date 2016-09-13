@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.github.austinv11</groupId>
             <artifactId>Discord4J</artifactId>
-            <version>2ea55c3</version>
+            <version>122aa70</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
