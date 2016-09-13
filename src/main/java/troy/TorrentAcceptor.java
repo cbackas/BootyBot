@@ -1,5 +1,7 @@
 package troy;
 
+import cback.Util;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.Socket;
@@ -24,7 +26,11 @@ public class TorrentAcceptor implements Runnable {
             if (contents[0].equalsIgnoreCase("add")) {
                 message = "***Torrent Added:***  " + contents[1];
             } else if (contents[0].equalsIgnoreCase("complete")) {
-                message = "***Torrent Complete:***  " + contents[1];
+                String countString = Util.readProperties().get("torrent#");
+                int newCount = Integer.parseInt(countString) + 1;
+                message = "*#" + newCount + "* ***Torrent Complete:***  " + contents[1];
+                Util.properties.put("torrent#", Integer.toString(newCount));
+                Util.writeProperties();
             }
 
             if (message != null) {
