@@ -1,5 +1,6 @@
 package cback;
 
+import cback.enums.Roles;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.UserBanEvent;
 import sx.blah.discord.handle.impl.events.UserJoinEvent;

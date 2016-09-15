@@ -1,4 +1,4 @@
-package cback;
+package cback.enums;
 
 public enum Rabbit {
 	ZAC("zac", "http://rabb.it/zgibson"),

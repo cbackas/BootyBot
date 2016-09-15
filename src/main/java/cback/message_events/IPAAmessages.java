@@ -1,5 +1,8 @@
-package cback;
+package cback.message_events;
 
+import cback.Util;
+import cback.enums.Rabbit;
+import cback.enums.Roles;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;

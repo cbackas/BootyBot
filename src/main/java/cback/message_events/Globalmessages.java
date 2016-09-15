@@ -1,5 +1,6 @@
-package cback;
+package cback.message_events;
 
+import cback.Util;
 import com.memetix.mst.language.Language;
 import com.memetix.mst.translate.Translate;
 import sx.blah.discord.api.events.EventSubscriber;
@@ -17,24 +18,33 @@ public class Globalmessages {
         IMessage message = event.getMessage();
         String text = message.getContent();
         //Commands
-            //Booty
+        //Booty
         if (text.equalsIgnoreCase("//booty")) {
             String sender = message.getAuthor().mention();
             Util.sendMessage(message.getChannel(), sender + " says booty");
             Util.deleteMessage(message);
             //Random Number
         } else if (text.toLowerCase().startsWith("//roll")) {
-            Pattern pattern = Pattern.compile("^//roll [1-9]+");
+            Pattern pattern = Pattern.compile("^//roll (-?[0-9]+)");
             Matcher matcher = pattern.matcher(text);
-            String rollInput = matcher.group(1);
             if (matcher.matches()) {
-                int rollInt = Integer.parseInt(rollInput);
-                Random rand = new Random();
-                int n = rand.nextInt(rollInt) + 1;
-                Util.sendMessage(message.getChannel(), Integer.toString(n));
+                try {
+                    String rollInput = matcher.group(1);
+                    int rollInt = Integer.parseInt(rollInput);
+                    if (rollInt > 0) {
+                        Random rand = new Random();
+                        int n = rand.nextInt(rollInt) + 1;
+                        Util.sendMessage(message.getChannel(), Integer.toString(n));
+                    } else {
+                        Util.sendMessage(message.getChannel(), "Lol that's too small of a number you silly goose");
+                    }
+                } catch (Exception e) {
+                    System.out.println("ERROR: requested roll number too large");
+                }
             } else {
                 Util.sendMessage(message.getChannel(), "**ERROR:** number not recognized");
             }
+
             //Translate
         } else if (text.toLowerCase().startsWith("//translate")) {
             if (text.contains("\"")) {
@@ -51,7 +61,7 @@ public class Globalmessages {
                         translatedText = Translate.execute(translate, Language.AUTO_DETECT, lang);
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Util.sendMessage(message.getChannel(), "**ERROR** - Is that a valid language?");
+                        Util.sendMessage(message.getChannel(), "**ERROR**: Is that a valid language?");
                     }
                     Util.sendMessage(message.getChannel(), translatedText);
                 }
@@ -61,14 +71,15 @@ public class Globalmessages {
             //Flip a coin
         } else if (text.equalsIgnoreCase("//coin")) {
             Random rand = new Random();
-            int n = rand.nextInt(2) + 1;
-            if (n == 1) {
+            int n = rand.nextInt(2);
+            if (n == 0) {
                 Util.sendMessage(message.getChannel(), "Heads");
-            } else {
+            } else if (n == 1) {
                 Util.sendMessage(message.getChannel(), "Tails");
+            } else {
+                Util.sendMessage(message.getChannel(), "Something weird happened but it's probably ok");
             }
         }
-
 
 
         //Command Listing

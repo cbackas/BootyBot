@@ -1,5 +1,7 @@
-package cback;
+package cback.message_events;
 
+import cback.Trans;
+import cback.Util;
 import com.memetix.mst.language.Language;
 import org.apache.commons.io.FileUtils;
 import sx.blah.discord.api.events.EventSubscriber;

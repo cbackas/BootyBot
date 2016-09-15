@@ -1,5 +1,9 @@
 package cback;
 
+import cback.message_events.AdminCommands;
+import cback.message_events.Globalmessages;
+import cback.message_events.IPAAmessages;
+import cback.message_events.Privatemessages;
 import com.memetix.mst.language.Language;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
@@ -53,6 +57,12 @@ public class BootyBot {
         } else {
             client.changeStatus(Status.game(Util.properties.get("status")));
         }
+    }
+
+    @EventSubscriber
+    public void onDisconnectEvent(DiscordDisconnectedEvent event) {
+        System.out.println("BOT DISCONNECTED");
+        System.out.println("Reason: " + event.getReason());
     }
 
     @EventSubscriber
