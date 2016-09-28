@@ -36,7 +36,7 @@ public class BootyBot {
     private void connect() {
         ClientBuilder clientBuilder = new ClientBuilder(); //Creates the ClientBuilder instance
         clientBuilder.withToken(Util.properties.get("token")); //Token stored in properties.txt
-        clientBuilder.setMaxReconnectAttempts(50);
+        clientBuilder.setMaxReconnectAttempts(5);
         try {
             client = clientBuilder.login();
         } catch (DiscordException e) {
