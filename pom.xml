@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.github.austinv11</groupId>
             <artifactId>Discord4J</artifactId>
-            <version>122aa70</version>
+            <version>8819c88</version>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -32,6 +32,11 @@
             <artifactId>microsoft-translator-java-api</artifactId>
             <version>0.6.2</version>
         </dependency>
+        <!--<dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.8.11.2</version>
+        </dependency>-->
     </dependencies>
 
     <build>

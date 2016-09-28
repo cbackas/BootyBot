@@ -24,13 +24,16 @@ public class TorrentAcceptor implements Runnable {
             String[] contents = data.split(":::");
             String message = null;
             if (contents[0].equalsIgnoreCase("add")) {
-                message = "***Torrent Added:***  " + contents[1];
+                message = "**Torrent Added:**  " + contents[1];
             } else if (contents[0].equalsIgnoreCase("complete")) {
                 String countString = Util.readProperties().get("torrent#");
                 int newCount = Integer.parseInt(countString) + 1;
-                message = "*#" + newCount + "* ***Torrent Complete:***  " + contents[1];
+                message = "*#" + newCount + "* **Torrent Complete:**  " + contents[1];
                 Util.properties.put("torrent#", Integer.toString(newCount));
                 Util.writeProperties();
+                if (newCount % 500 == 0) {
+                    Util.sendMessage(bot.getChannel().getClient().getChannelByID("168983653760630784"), "**" + Integer.toString(newCount) + "torrents downloaded! Way to break the law!** \n https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif");
+                }
             }
 
             if (message != null) {
