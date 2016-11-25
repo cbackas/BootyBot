@@ -1,6 +1,8 @@
 package troy;
 
 import cback.Util;
+import in.ashwanthkumar.slack.webhook.Slack;
+import in.ashwanthkumar.slack.webhook.SlackMessage;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -32,14 +34,19 @@ public class TorrentAcceptor implements Runnable {
                 Util.properties.put("torrent#", Integer.toString(newCount));
                 Util.writeProperties();
                 if (newCount % 500 == 0) {
-                    Util.sendMessage(bot.getChannel().getClient().getChannelByID("168983653760630784"), "**" + Integer.toString(newCount) + "torrents downloaded! Way to break the law!** \n https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif");
+                    Util.sendMessage(bot.getChannel().getClient().getChannelByID("168983653760630784"), "**" + Integer.toString(newCount) + " torrents downloaded! Way to break the law!** \n https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif");
                 }
             }
 
             if (message != null) {
                 if (bot.getChannel().getClient().isReady() && bot.getChannel().getClient() != null) {
                     try {
-                        bot.getChannel().sendMessage(message);
+
+                        new Slack("https://ptb.discordapp.com/api/webhooks/251750441866493953/PJ7nRcCrdp6R8WtKoKQMsrCPZnoEN9kKaBxChzzU-KuA0NfBSLGO0jWnGDa7Ol0MXbks/slack")
+                                .icon("http://i.imgur.com/UalcXsz.png")
+                                .displayName("MediaBot")
+                                .push(new SlackMessage(message));
+
                         bot.processQueue();
                     } catch (Exception e) {
                         System.out.println("[MEDIABOT] Failed to send message, added to queue: " + message);

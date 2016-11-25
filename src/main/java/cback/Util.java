@@ -18,12 +18,12 @@ import java.util.stream.Collectors;
 
 public class Util {
 
-    public static void sendMessage(IChannel channel, String message) {
-        try {
-            channel.sendMessage(message);
-        } catch (Exception ignored) {
+        public static void sendMessage(IChannel channel, String message) {
+            try {
+                channel.sendMessage(message);
+            } catch (Exception ignored) {
+            }
         }
-    }
 
     public static void deleteMessage(IMessage message) {
         try {
@@ -71,27 +71,6 @@ public class Util {
         return properties;
     }
 
-/*    public static void sqlStuff() {
-        Connection connection = null;
-        try {
-            Class.forName("org.sqlite.JDBC");
-            // create a database connection
-            connection = DriverManager.getConnection("jdbc:sqlite:" + botPath + "/mydatabase.db");
-            Statement statement = connection.createStatement();
-            statement.setQueryTimeout(30);  // set timeout to 30 sec.
-
-            statement.executeUpdate("create table settings (token string, status string, language string, torrent# int, admins string)");
-            ResultSet rs = statement.executeQuery("select * from string");
-            while(rs.next())
-            {
-                // read the result set
-                System.out.println("name = " + rs.getString("name"));
-                System.out.println("id = " + rs.getInt("id"));
-            }
-        } catch(Exception e) {
-            System.err.println(e.getMessage());
-        }
-    }*/
 
     public static void writeProperties() {
         File propFile = new File(Util.botPath, "properties.txt");
