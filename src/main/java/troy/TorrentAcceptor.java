@@ -34,7 +34,7 @@ public class TorrentAcceptor implements Runnable {
                 Util.properties.put("torrent#", Integer.toString(newCount));
                 Util.writeProperties();
                 if (newCount % 500 == 0) {
-                    Util.sendMessage(bot.getChannel().getClient().getChannelByID("168983653760630784"), "**" + Integer.toString(newCount) + " torrents downloaded! Way to break the law!** \n https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif");
+                    sendMediaServerMessage("**" + Integer.toString(newCount) + " torrents downloaded! Way to break the law!** https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif");
                 }
             }
 
@@ -42,10 +42,7 @@ public class TorrentAcceptor implements Runnable {
                 if (bot.getChannel().getClient().isReady() && bot.getChannel().getClient() != null) {
                     try {
 
-                        new Slack("https://ptb.discordapp.com/api/webhooks/251750441866493953/PJ7nRcCrdp6R8WtKoKQMsrCPZnoEN9kKaBxChzzU-KuA0NfBSLGO0jWnGDa7Ol0MXbks/slack")
-                                .icon("http://i.imgur.com/UalcXsz.png")
-                                .displayName("MediaBot")
-                                .push(new SlackMessage(message));
+                        sendMediaServerMessage(message);
 
                         bot.processQueue();
                     } catch (Exception e) {
@@ -63,6 +60,17 @@ public class TorrentAcceptor implements Runnable {
             in.close();
             clientSocket.close();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void sendMediaServerMessage(String message) {
+        try {
+            new Slack("https://ptb.discordapp.com/api/webhooks/251750441866493953/PJ7nRcCrdp6R8WtKoKQMsrCPZnoEN9kKaBxChzzU-KuA0NfBSLGO0jWnGDa7Ol0MXbks/slack")
+                    .icon("http://i.imgur.com/UalcXsz.png")
+                    .displayName("MediaBot")
+                    .push(new SlackMessage(message));
         } catch (Exception e) {
             e.printStackTrace();
         }

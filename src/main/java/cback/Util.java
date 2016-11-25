@@ -1,5 +1,7 @@
 package cback;
 
+import in.ashwanthkumar.slack.webhook.Slack;
+import in.ashwanthkumar.slack.webhook.SlackMessage;
 import org.apache.commons.io.FileUtils;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IMessage;
