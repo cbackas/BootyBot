@@ -1,7 +1,5 @@
 package cback;
 
-import in.ashwanthkumar.slack.webhook.Slack;
-import in.ashwanthkumar.slack.webhook.SlackMessage;
 import org.apache.commons.io.FileUtils;
 import sx.blah.discord.handle.obj.IChannel;
 import sx.blah.discord.handle.obj.IMessage;
@@ -11,7 +9,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.sql.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

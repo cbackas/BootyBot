@@ -4,14 +4,12 @@ import cback.message_events.AdminCommands;
 import cback.message_events.Globalmessages;
 import cback.message_events.IPAAmessages;
 import cback.message_events.Privatemessages;
-import com.memetix.mst.language.Language;
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.*;
 import sx.blah.discord.handle.obj.*;
 import sx.blah.discord.util.DiscordException;
-import troy.MediaBotFeatures;
 
 public class BootyBot {
     public IDiscordClient client;
@@ -24,7 +22,6 @@ public class BootyBot {
         Util.properties = Util.readProperties(); //Populate those properties girl
         connect();
         client.getDispatcher().registerListener(this);
-        client.getDispatcher().registerListener(new Trans());
         client.getDispatcher().registerListener(new IPAAmessages());
         client.getDispatcher().registerListener(new Globalmessages());
         client.getDispatcher().registerListener(new Privatemessages());
@@ -49,7 +46,6 @@ public class BootyBot {
         System.out.println("Logged in.");
 
         //Do properties things
-        Trans.currentLang = Language.valueOf(Util.properties.get("language").toUpperCase());
         AdminCommands.adminsFromFile = Util.properties.get("admins");
         String alpha = Util.properties.get("status");
         if (alpha.equalsIgnoreCase("clear")) {
@@ -63,11 +59,6 @@ public class BootyBot {
     public void onDisconnectEvent(DiscordDisconnectedEvent event) {
         System.out.println("BOT DISCONNECTED");
         System.out.println("Reason: " + event.getReason());
-    }
-
-    @EventSubscriber
-    public void guildCreateEvent(GuildCreateEvent event) {
-        MediaBotFeatures.onGuildCreate(event);
     }
 
 }

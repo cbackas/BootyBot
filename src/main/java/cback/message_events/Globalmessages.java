@@ -1,8 +1,6 @@
 package cback.message_events;
 
 import cback.Util;
-import com.memetix.mst.language.Language;
-import com.memetix.mst.translate.Translate;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IMessage;
@@ -45,29 +43,6 @@ public class Globalmessages {
                 Util.sendMessage(message.getChannel(), "**ERROR:** number not recognized");
             }
 
-            //Translate
-        } else if (text.toLowerCase().startsWith("//translate")) {
-            if (text.contains("\"")) {
-                Pattern pattern = Pattern.compile("^//translate (.+) \"(.+)\"");
-                Matcher matcher = pattern.matcher(text);
-                if (matcher.find()) {
-                    String language = matcher.group(1);
-                    String translate = matcher.group(2);
-                    Translate.setClientId("ipaa");
-                    Translate.setClientSecret("ALyVSgi+7YPWucdwz5pyBxBpQE8QiGZkhGB6WIan2Zg=");
-                    String translatedText = null;
-                    try {
-                        Language lang = Language.valueOf(language.toUpperCase());
-                        translatedText = Translate.execute(translate, Language.AUTO_DETECT, lang);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                        Util.sendMessage(message.getChannel(), "**ERROR**: Is that a valid language?");
-                    }
-                    Util.sendMessage(message.getChannel(), translatedText);
-                }
-            } else {
-                Util.sendMessage(message.getChannel(), "**Command usage:** \n     ``/translate desiredlanguage \"text to translate\"``");
-            }
             //Flip a coin
         } else if (text.equalsIgnoreCase("//coin")) {
             Random rand = new Random();
@@ -103,7 +78,6 @@ public class Globalmessages {
                         " \n  ``//booty`` - says booty" +
                         " \n  ``//roll <#>`` - picks a random number from 1-your#" +
                         " \n  ``//coin`` - flips a coin" +
-                        " \n  ``//translate language \"text\"`` - translates your text to desired language" +
                         " \n  ");
             }
         } else if (text.equals("<@194546381094912001>")) {

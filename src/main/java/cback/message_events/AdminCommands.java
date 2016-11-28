@@ -1,8 +1,6 @@
 package cback.message_events;
 
-import cback.Trans;
 import cback.Util;
-import com.memetix.mst.language.Language;
 import org.apache.commons.io.FileUtils;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
@@ -53,23 +51,6 @@ public class AdminCommands {
                     Util.sendMessage(message.getChannel(), "**ERROR:** Something weird happened. Could not match arguments.");
                 }
                 Util.deleteMessage(message);
-                //Set the language of the translation channel
-            } else if (text.toLowerCase().startsWith("//setlanguage")) {
-                Pattern pattern = Pattern.compile("^//setlanguage (.+)");
-                Matcher matcher = pattern.matcher(text);
-                if (matcher.find()) {
-                    String language = matcher.group(1);
-                    Language lang = Language.valueOf(language.toUpperCase());
-                    if (lang != null) {
-                        Trans.currentLang = lang;
-                        Util.properties.put("language", language);
-                        Util.writeProperties();
-                        Util.sendMessage(message.getChannel(), "Translation language updated to " + language);
-                    } else {
-                        Util.sendMessage(message.getChannel(), "**ERROR:** Desired language not found");
-                    }
-                    Util.deleteMessage(message);
-                }
                 //Set the MediaIP in the file
             } else if (text.toLowerCase().startsWith("//mediaip")) {
                 String ip = null;
