@@ -1,10 +1,12 @@
 package cback.message_events;
 
+import cback.BootyBot;
 import cback.Util;
 import org.apache.commons.io.FileUtils;
 import sx.blah.discord.api.events.EventSubscriber;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
 import sx.blah.discord.handle.obj.IMessage;
+import sx.blah.discord.handle.obj.IRole;
 import sx.blah.discord.handle.obj.Status;
 
 import java.io.File;
@@ -74,6 +76,9 @@ public class AdminCommands {
                     Util.sendMessage(message.getChannel(), "MediaIP update failed - ip is null");
                 }
                 Util.deleteMessage(message);
+            } else if (text.toLowerCase().startsWith("//trigger")) {
+                IRole role = message.getGuild().getRolesByName("Cameron").get(0);
+                Util.sendMessage(message.getChannel(), role.getID());
             }
         }
     }
