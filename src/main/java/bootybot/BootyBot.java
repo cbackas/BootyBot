@@ -1,5 +1,6 @@
 package bootybot;
 
+import bootybot.games.GameList;
 import bootybot.util.Util;
 import net.dv8tion.jda.core.AccountType;
 import net.dv8tion.jda.core.JDA;
@@ -11,15 +12,21 @@ import java.util.Optional;
 
 public class BootyBot extends ListenerAdapter {
 
-    public static BootyBot instance;
-    private JDA client;
+    private static BootyBot instance;
 
+    private JDA client;
+    private CommandManager commandManager;
+    private GameList gameList;
 
     public BootyBot() {
         if (instance == null) instance = this;
         connect();
 
-        //client.addEventListener(commandManager);
+        commandManager = new CommandManager(this);
+        gameList = new GameList(this);
+
+
+        client.addEventListener(commandManager);
         //client.addEventListener(eventWaiter);
 
     }
@@ -58,5 +65,17 @@ public class BootyBot extends ListenerAdapter {
 
     public JDA getClient() {
         return client;
+    }
+
+    public CommandManager getCommandManager() {
+        return commandManager;
+    }
+
+    public GameList getGameList() {
+        return gameList;
+    }
+
+    public static BootyBot getInstance() {
+        return instance;
     }
 }

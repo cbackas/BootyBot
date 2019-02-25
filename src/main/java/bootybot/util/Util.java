@@ -52,7 +52,7 @@ public class Util {
     public static void sendMessage(MessageChannel channel, String message) {
         try {
             channel.sendMessage(message).queue();
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println("Failed to send message!");
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class Util {
     }
 
     public static void deleteMessage(Message message) {
-        try{
+        try {
             message.delete().queue();
         } catch (Exception e) {
             System.out.println("Failed to delete message in #" + message.getChannel().getName());
