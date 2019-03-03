@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class CommandManager extends ListenerAdapter {
 
@@ -24,6 +25,7 @@ public class CommandManager extends ListenerAdapter {
 
     public CommandManager(BootyBot bootyBot) {
         this.bootyBot = bootyBot;
+        bootyBot.getClient().addEventListener(this);
         registerAllCommands();
     }
 
@@ -34,7 +36,6 @@ public class CommandManager extends ListenerAdapter {
                 Optional<Command> commandOptional = registeredCommands.stream().filter(cmd -> cmd.getName().equalsIgnoreCase(command.getName())).findAny();
                 if (commandOptional.isEmpty()) {
                     registeredCommands.add(command);
-                    System.out.println("Registered command: " + command.getName());
                 } else {
                     System.out.println("Attempted to register two commands with the same name: " + commandOptional.get().getName());
                     System.out.println("Existing: " + commandOptional.get().getClass().getName());
@@ -44,6 +45,8 @@ public class CommandManager extends ListenerAdapter {
                 e.printStackTrace();
             }
         });
+
+        System.out.println("Registered commands: " + registeredCommands.stream().map(Command::getName).collect(Collectors.joining(", ")));
     }
 
     @Override

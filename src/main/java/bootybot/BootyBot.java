@@ -15,19 +15,21 @@ public class BootyBot extends ListenerAdapter {
     private static BootyBot instance;
 
     private JDA client;
-    private CommandManager commandManager;
     private GameList gameList;
+    private MemberManager memberManager;
 
     public BootyBot() {
         if (instance == null) instance = this;
+
         connect();
 
-        commandManager = new CommandManager(this);
+        //instantiate game list
         gameList = new GameList(this);
+        //instantiate the member restorer
+        memberManager = new MemberManager(this);
+        //instantiate the command manager (we do not need to save its instance)
+        new CommandManager(this);
 
-
-        client.addEventListener(commandManager);
-        //client.addEventListener(eventWaiter);
 
     }
 
@@ -67,15 +69,16 @@ public class BootyBot extends ListenerAdapter {
         return client;
     }
 
-    public CommandManager getCommandManager() {
-        return commandManager;
-    }
-
     public GameList getGameList() {
         return gameList;
+    }
+
+    public MemberManager getMemberManager() {
+        return memberManager;
     }
 
     public static BootyBot getInstance() {
         return instance;
     }
+
 }

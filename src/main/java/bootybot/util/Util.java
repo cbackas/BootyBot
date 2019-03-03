@@ -1,6 +1,8 @@
 package bootybot.util;
 
 import bootybot.BootyBot;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.dv8tion.jda.core.entities.Message;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.User;
@@ -20,6 +22,8 @@ public class Util {
     public static File botPath;
 
     private static final Pattern USER_MENTION_PATTERN = Pattern.compile("^<@!?(\\d+)>$");
+
+    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
 
     static {
         try {
