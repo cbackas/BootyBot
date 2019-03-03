@@ -51,9 +51,10 @@ public class CommandGames implements Command {
                                     }
                                 })
                                 .collect(Collectors.toList()), ", ");
-                Util.sendMessage(message.getChannel(), "**Games (" + users + ") can play together:**\n" + StringUtils.join(matchingGames, "\n"));
+
+                Util.simpleEmbed(message.getChannel(), "**Games (" + users + ") can play together:**\n" + StringUtils.join(matchingGames, "\n"));
             } else {
-                Util.sendMessage(message.getChannel(), "No games found.");
+                Util.simpleEmbed(message.getChannel(), "No games found.");
             }
         }
     }

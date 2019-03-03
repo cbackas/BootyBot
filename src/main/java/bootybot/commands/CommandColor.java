@@ -39,34 +39,34 @@ public class CommandColor implements Command {
                     if(bootyBot.getMemberManager().getMember(author.getUser().getId()) != null) {
                         Color newColor = Color.decode(colorArg);
                         bootyBot.getMemberManager().setColor(author.getUser().getId(), newColor);
-                        Util.sendMessage(message.getChannel(),"Successfully changed color to " + toHex(newColor));
+                        Util.simpleEmbed(message.getChannel(), "Changed color to " + toHex(newColor), newColor);
                     } else {
-                        Util.sendMessage(message.getChannel(),"You can't change your color, you're not on the list bud.");
+                        Util.simpleEmbed(message.getChannel(), "You can't change your color, you're not on the list bud.");
                     }
                 }catch (Exception e){
-                    Util.sendMessage(message.getChannel(),"Invalid color");
+                    Util.simpleEmbed(message.getChannel(),"Invalid color");
                 }
 
             } else if (colorArg.equalsIgnoreCase("current")){
                 Color currentColor = bootyBot.getMemberManager().getColor(author.getUser().getId());
                 if(currentColor == null){
-                    Util.sendMessage(message.getChannel(),"You don't have a color saved?");
+                    Util.simpleEmbed(message.getChannel(), "You don't have a color saved?");
                 } else {
-                    Util.sendMessage(message.getChannel(),"Your current color is " + toHex(currentColor));
+                    Util.simpleEmbed(message.getChannel(), "Your current color is " + toHex(currentColor), currentColor);
                 }
             } else if(colorArg.equalsIgnoreCase("random")){
                 if(bootyBot.getMemberManager().getMember(author.getUser().getId()) != null) {
                     Color newColor = new Color((int)(Math.random() * 0x1000000));
                     bootyBot.getMemberManager().setColor(author.getUser().getId(), newColor);
-                    Util.sendMessage(message.getChannel(),"Changed color to " + toHex(newColor));
+                    Util.simpleEmbed(message.getChannel(), "Changed color to " + toHex(newColor), newColor);
                 } else {
-                    Util.sendMessage(message.getChannel(),"You can't change your color, you're not on the list bud.");
+                    Util.simpleEmbed(message.getChannel(),"You can't change your color, you're not on the list bud.");
                 }
             } else {
-                Util.sendMessage(message.getChannel(),"Invalid syntax: " + getSyntax());
+                Util.simpleEmbed(message.getChannel(),"Invalid syntax: " + getSyntax());
             }
         } else {
-            Util.sendMessage(message.getChannel(),"Invalid syntax: " + getSyntax());
+            Util.simpleEmbed(message.getChannel(),"Invalid syntax: " + getSyntax());
         }
     }
 

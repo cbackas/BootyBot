@@ -57,9 +57,9 @@ public class CommandGame implements Command {
                                 })
                                 .collect(Collectors.toList()), ", ");
 
-                Util.sendMessage(message.getChannel(), "You should play **" + randomGame + "**. (" + users + ")");
+                Util.simpleEmbed(message.getChannel(), "You should play **" + randomGame + "**. (" + users + ")", Util.getNewColor());
             } else {
-                Util.sendMessage(message.getChannel(), "No games found.");
+                Util.simpleEmbed(message.getChannel(), "No games found.");
             }
         }
     }
