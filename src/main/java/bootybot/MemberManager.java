@@ -2,10 +2,12 @@ package bootybot;
 
 import bootybot.util.Util;
 import com.google.gson.reflect.TypeToken;
+import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.apache.commons.io.FileUtils;
 
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -25,6 +27,25 @@ public class MemberManager extends ListenerAdapter {
         bot.getClient().addEventListener(this);
     }
 
+    public void setColor(String userID, Color color) {
+        IPAAMember ipaaMember = getMember(userID);
+        if (ipaaMember != null) {
+
+            Role userRole = bot.getClient().getRoleById(ipaaMember.roleID);
+            userRole.getManager().setColor(color).queue();
+
+        }
+    }
+
+    public Color getColor(String userID) {
+        IPAAMember ipaaMember = getMember(userID);
+        if (ipaaMember != null) {
+            Role userRole = bot.getClient().getRoleById(ipaaMember.roleID);
+            return userRole.getColor();
+        }
+        return null;
+    }
+
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         IPAAMember joinedMember = getMember(event.getUser().getId());
@@ -32,7 +53,8 @@ public class MemberManager extends ListenerAdapter {
 
             var guildMember = event.getMember();
 
-            event.getGuild().getController().modifyMemberRoles(guildMember, bot.getClient().getRoleById(joinedMember.roleID), bot.getClient().getRoleById(joinedMember.human));
+            event.getGuild().getController()
+                    .modifyMemberRoles(guildMember, bot.getClient().getRoleById(joinedMember.roleID), bot.getClient().getRoleById(joinedMember.human));
 
         }
     }
@@ -46,8 +68,7 @@ public class MemberManager extends ListenerAdapter {
         if (memberFile.exists()) {
             try {
                 String readJson = FileUtils.readFileToString(memberFile, Charset.defaultCharset());
-                members = Util.GSON.fromJson(readJson, new TypeToken<List<IPAAMember>>() {
-                }.getType());
+                members = Util.GSON.fromJson(readJson, new TypeToken<List<IPAAMember>>() {}.getType());
             } catch (IOException e) {
                 e.printStackTrace();
                 writeDefaults();
@@ -86,6 +107,7 @@ public class MemberManager extends ListenerAdapter {
         private String roleID;
         private String human;
         private String nick;
+        private Color color;
 
         public IPAAMember(String nick, String roleID, String human, String userID) {
             this.userID = userID;

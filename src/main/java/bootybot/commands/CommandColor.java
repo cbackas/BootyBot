@@ -50,7 +50,7 @@ public class CommandColor implements Command {
             } else if (colorArg.equalsIgnoreCase("current")){
                 Color currentColor = bootyBot.getMemberManager().getColor(author.getUser().getId());
                 if(currentColor == null){
-                    Util.simpleEmbed(message.getChannel(), "You don't have a color saved?");
+                    Util.simpleEmbed(message.getChannel(), "You don't have a color?");
                 } else {
                     Util.simpleEmbed(message.getChannel(), "Your current color is " + toHex(currentColor), currentColor);
                 }
