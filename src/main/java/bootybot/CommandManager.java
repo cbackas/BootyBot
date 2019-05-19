@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class CommandManager extends ListenerAdapter {
 
-    private static Pattern BOOTY_PATTERN = Pattern.compile("booty");
+    private static Pattern BOOTY_PATTERN = Pattern.compile("booty", Pattern.CASE_INSENSITIVE);
 
     private BootyBot bootyBot;
     private List<Command> registeredCommands = new ArrayList<>();
