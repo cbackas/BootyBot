@@ -2,12 +2,10 @@ package bootybot;
 
 import bootybot.util.Util;
 import com.google.gson.reflect.TypeToken;
-import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.core.hooks.ListenerAdapter;
 import org.apache.commons.io.FileUtils;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -27,26 +25,6 @@ public class MemberManager extends ListenerAdapter {
         bot.getClient().addEventListener(this);
     }
 
-    public void setColor(String userID, Color color) {
-        IPAAMember ipaaMember = getMember(userID);
-        if (ipaaMember != null) {
-
-            Role userRole = bot.getClient().getRoleById(ipaaMember.roleID);
-            userRole.getManager().setColor(color).queue();
-
-            ipaaMember.setColor(color);
-            writeMembers();
-        }
-    }
-
-    public Color getColor(String userID) {
-        IPAAMember ipaaMember = getMember(userID);
-        if (ipaaMember != null) {
-            return ipaaMember.getColor();
-        }
-        return null;
-    }
-
     @Override
     public void onGuildMemberJoin(GuildMemberJoinEvent event) {
         IPAAMember joinedMember = getMember(event.getUser().getId());
@@ -54,8 +32,7 @@ public class MemberManager extends ListenerAdapter {
 
             var guildMember = event.getMember();
 
-            event.getGuild().getController()
-                    .modifyMemberRoles(guildMember, bot.getClient().getRoleById(joinedMember.roleID), bot.getClient().getRoleById(joinedMember.human));
+            event.getGuild().getController().modifyMemberRoles(guildMember, bot.getClient().getRoleById(joinedMember.roleID), bot.getClient().getRoleById(joinedMember.human));
 
         }
     }
@@ -69,7 +46,8 @@ public class MemberManager extends ListenerAdapter {
         if (memberFile.exists()) {
             try {
                 String readJson = FileUtils.readFileToString(memberFile, Charset.defaultCharset());
-                members = Util.GSON.fromJson(readJson, new TypeToken<List<IPAAMember>>() {}.getType());
+                members = Util.GSON.fromJson(readJson, new TypeToken<List<IPAAMember>>() {
+                }.getType());
             } catch (IOException e) {
                 e.printStackTrace();
                 writeDefaults();
@@ -91,13 +69,13 @@ public class MemberManager extends ListenerAdapter {
     private void writeDefaults() {
         System.out.println("Writing default members.");
         members = new ArrayList<>();
-        members.add(new IPAAMember("Zac", "109113911038464000", "193972344312692736", "73416411443113984", bot.getClient().getRoleById("109113911038464000").getColor()));
-        members.add(new IPAAMember("Troy", "109114673709760512", "193972344312692736", "109109946565537792", bot.getClient().getRoleById("109114673709760512").getColor()));
-        members.add(new IPAAMember("Jeremy", "109114986596454400", "193972344312692736", "109110807308029952", bot.getClient().getRoleById("109114986596454400").getColor()));
-        members.add(new IPAAMember("Josh", "109114531648647168", "193972344312692736", "73463573900173312", bot.getClient().getRoleById("109114531648647168").getColor()));
-        members.add(new IPAAMember("Gibs", "109115360581521408", "193972344312692736", "109109787517571072", bot.getClient().getRoleById("109115360581521408").getColor()));
-        members.add(new IPAAMember("Ryan", "109112910340435968", "193972344312692736", "109109783952371712", bot.getClient().getRoleById("109112910340435968").getColor()));
-        members.add(new IPAAMember("Tates", "184730166474440705", "193972344312692736", "110508617974697984", bot.getClient().getRoleById("184730166474440705").getColor()));
+        members.add(new IPAAMember("Zac", "109113911038464000", "193972344312692736", "73416411443113984"));
+        members.add(new IPAAMember("Troy", "109114673709760512", "193972344312692736", "109109946565537792"));
+        members.add(new IPAAMember("Jeremy", "109114986596454400", "193972344312692736", "109110807308029952"));
+        members.add(new IPAAMember("Josh", "109114531648647168", "193972344312692736", "73463573900173312"));
+        members.add(new IPAAMember("Gibs", "109115360581521408", "193972344312692736", "109109787517571072"));
+        members.add(new IPAAMember("Ryan", "109112910340435968", "193972344312692736", "109109783952371712"));
+        members.add(new IPAAMember("Tates", "184730166474440705", "193972344312692736", "110508617974697984"));
 
         writeMembers();
     }
@@ -108,14 +86,12 @@ public class MemberManager extends ListenerAdapter {
         private String roleID;
         private String human;
         private String nick;
-        private Color color;
 
-        public IPAAMember(String nick, String roleID, String human, String userID, Color color) {
+        public IPAAMember(String nick, String roleID, String human, String userID) {
             this.userID = userID;
             this.roleID = roleID;
             this.human = human;
             this.nick = nick;
-            this.color = color;
         }
 
         public String getUserID() {
@@ -134,10 +110,6 @@ public class MemberManager extends ListenerAdapter {
             return nick;
         }
 
-        public Color getColor() {
-            return color;
-        }
-
         public void setUserID(String userID) {
             this.userID = userID;
         }
@@ -154,9 +126,6 @@ public class MemberManager extends ListenerAdapter {
             this.nick = nick;
         }
 
-        public void setColor(Color color) {
-            this.color = color;
-        }
     }
 }
 
