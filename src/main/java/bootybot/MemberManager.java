@@ -69,8 +69,7 @@ public class MemberManager extends ListenerAdapter {
         if (memberFile.exists()) {
             try {
                 String readJson = FileUtils.readFileToString(memberFile, Charset.defaultCharset());
-                members = Util.GSON.fromJson(readJson, new TypeToken<List<IPAAMember>>() {
-                }.getType());
+                members = Util.GSON.fromJson(readJson, new TypeToken<List<IPAAMember>>() {}.getType());
             } catch (IOException e) {
                 e.printStackTrace();
                 writeDefaults();
