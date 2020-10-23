@@ -29,7 +29,9 @@ public class Util {
 
     static {
         try {
-            botPath = new File(BootyBot.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile();
+            File jarPath = new File(BootyBot.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath()).getParentFile();
+            botPath = new File(jarPath, "data");
+            botPath.mkdir();
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
