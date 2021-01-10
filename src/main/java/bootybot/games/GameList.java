@@ -131,6 +131,7 @@ public class GameList {
         userAliases.put("109109787517571072", Arrays.asList("gibs", "goobs", "gabs"));
         userAliases.put("73416411443113984", Arrays.asList("zac", "zacolio", "zacbell", "zeke", "zack"));
         userAliases.put("109109783952371712", Arrays.asList("ryan", "nayr", "rain"));
+        userAliases.put("110508617974697984", Arrays.asList("tates", "joe", "joseph", "kanye"));
     }
 
     /**
