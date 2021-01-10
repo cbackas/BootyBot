@@ -2,9 +2,9 @@ package bootybot;
 
 import bootybot.util.Util;
 import com.google.gson.reflect.TypeToken;
-import net.dv8tion.jda.core.entities.Role;
-import net.dv8tion.jda.core.events.guild.member.GuildMemberJoinEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.Role;
+import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.commons.io.FileUtils;
 
 import java.awt.*;
@@ -53,8 +53,7 @@ public class MemberManager extends ListenerAdapter {
 
             var guildMember = event.getMember();
 
-            event.getGuild().getController()
-                    .modifyMemberRoles(guildMember, bot.getClient().getRoleById(joinedMember.roleID), bot.getClient().getRoleById(joinedMember.human));
+            event.getGuild().modifyMemberRoles(guildMember, bot.getClient().getRoleById(joinedMember.roleID), bot.getClient().getRoleById(joinedMember.human));
 
         }
     }

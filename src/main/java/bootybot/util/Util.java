@@ -3,8 +3,11 @@ package bootybot.util;
 import bootybot.BootyBot;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.dv8tion.jda.core.EmbedBuilder;
-import net.dv8tion.jda.core.entities.*;
+import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Message;
+import net.dv8tion.jda.api.entities.MessageChannel;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
 import org.apache.commons.io.FileUtils;
 
 import java.awt.*;

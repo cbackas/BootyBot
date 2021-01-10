@@ -2,11 +2,10 @@ package bootybot;
 
 import bootybot.games.GameList;
 import bootybot.util.Util;
-import net.dv8tion.jda.core.AccountType;
-import net.dv8tion.jda.core.JDA;
-import net.dv8tion.jda.core.JDABuilder;
-import net.dv8tion.jda.core.events.ReadyEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.JDABuilder;
+import net.dv8tion.jda.api.events.ReadyEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
 import java.util.Optional;
 
@@ -45,11 +44,9 @@ public class BootyBot extends ListenerAdapter {
         }
 
         try {
-            this.client = new JDABuilder(AccountType.BOT)
-                    .setToken(token.get())
-                    .setAudioEnabled(true)
+            this.client = JDABuilder.createDefault(token.get())
                     .setAutoReconnect(true)
-                    .addEventListener(this)
+                    .addEventListeners(this)
                     .build();
 
             //Wait until JDA is ready

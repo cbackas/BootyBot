@@ -2,9 +2,9 @@ package bootybot;
 
 import bootybot.commands.Command;
 import bootybot.util.Util;
-import net.dv8tion.jda.core.entities.ChannelType;
-import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import net.dv8tion.jda.core.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.entities.ChannelType;
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
+import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.reflections.Reflections;
 
 import java.lang.reflect.InvocationTargetException;
